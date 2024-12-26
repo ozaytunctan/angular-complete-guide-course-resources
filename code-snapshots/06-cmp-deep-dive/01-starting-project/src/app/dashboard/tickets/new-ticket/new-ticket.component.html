@@ -1,24 +1,22 @@
 <form>
-  <div>
-    <label>Title</label>
+  <form-control label="Title">
     <input name="title" id="title"
            [(ngModel)]="enteredName"/>
-  </div>
-  <div>
-    <label>Request</label>
+  </form-control>
+
+  <form-control label="Request">
     <textarea name="request"
               id="request"
               rows="3"
               [(ngModel)]="enteredRequest">
     </textarea>
-  </div>
+  </form-control>
+
 
   <div>
-    <button>
-      <span>Submit</span>
-      <span class="icon">
-          →
-      </span>
+    <button base-button>
+      Submit
+      <span class="icon">→</span>
     </button>
   </div>
 </form>
