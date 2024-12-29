@@ -2,7 +2,9 @@
   <ul>
     @for (ticket of tickets; track ticket.id) {
       <li>
-        <app-ticket [data]="ticket" />
+        <app-ticket [data]="ticket"
+                    (close)="onCloseTicket($event)"
+                    (open)="onReOpenTicket($event)"/>
       </li>
     } @empty {
       <p>No tickets available.</p>
@@ -11,5 +13,5 @@
 </div>
 
 <div id="new-ticket">
-  <app-new-ticket (add)="onAdd($event)" />
+  <app-new-ticket (add)="onAdd($event)"/>
 </div>

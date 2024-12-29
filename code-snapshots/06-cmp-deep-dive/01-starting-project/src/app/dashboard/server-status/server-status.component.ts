@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {DashboardItemComponent} from "../dashboard-item/dashboard-item.component";
 
 type ServerStatus = 'offline' | 'online' | 'unknown';
@@ -16,6 +16,8 @@ export class ServerStatusComponent implements OnInit {
   currentStatus: ServerStatus = "online";
 
   private intervalRef: any;
+  private destroyRef = inject(DestroyRef);
+
   constructor() {
   }
 
@@ -29,13 +31,17 @@ export class ServerStatusComponent implements OnInit {
       } else {
         this.currentStatus = 'unknown';
       }
-    }, 5000)
+    }, 5000);
+
+    this.destroyRef.onDestroy(() => {
+      clearInterval(this.intervalRef)
+    })
   }
 
   ngOnDestroy() {
-    if (this.intervalRef) {
-      clearInterval(this.intervalRef);
-    }
+    // if (this.intervalRef) {
+    //   clearInterval(this.intervalRef);
+    // }
   }
 
 
