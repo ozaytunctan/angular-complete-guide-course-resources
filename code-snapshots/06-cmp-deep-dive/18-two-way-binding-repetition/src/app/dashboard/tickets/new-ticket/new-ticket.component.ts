@@ -7,12 +7,12 @@ import {
   Output,
   ViewChild,
   output,
-  viewChild,
+  viewChild, model, signal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
-import { ButtonComponent } from '../../../shared/button/button.component';
-import { ControlComponent } from '../../../shared/control/control.component';
+import {ButtonComponent} from '../../../shared/button/button.component';
+import {ControlComponent} from '../../../shared/control/control.component';
 
 @Component({
   selector: 'app-new-ticket',
@@ -25,8 +25,8 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
   // private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
   // @Output() add = new EventEmitter<{title: string; text: string}>();
-  enteredTitle = '';
-  enteredText = '';
+  enteredTitle = signal<string>('');
+  enteredText = signal<string>('');
   add = output<{ title: string; text: string }>();
 
   ngOnInit() {
@@ -40,9 +40,9 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.add.emit({ title: this.enteredTitle, text: this.enteredText });
+    this.add.emit({title: this.enteredTitle(), text: this.enteredText()});
     // this.form?.nativeElement.reset();
-    this.enteredTitle = '';
-    this.enteredText = '';
+    this.enteredTitle.set('')
+    this.enteredText.set('')
   }
 }
