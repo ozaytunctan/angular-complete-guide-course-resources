@@ -1,17 +1,20 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'temp',
+  name: 'temperature',
   standalone: true,
 })
 export class TemperaturePipe implements PipeTransform {
   transform(
-    value: string | number,
-    inputType: 'cel' | 'fah',
+    value: string | number | null,
+    inputType: 'cel' | 'fah' = 'cel',
     outputType?: 'cel' | 'fah'
   ) {
-    let val: number;
+    if (!value) {
+      return value;
+    }
 
+    let val: number;
     if (typeof value === 'string') {
       val = parseFloat(value);
     } else {

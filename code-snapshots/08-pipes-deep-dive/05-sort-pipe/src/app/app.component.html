@@ -1,7 +1,7 @@
 <main>
   <article class="temperatures">
     <header>
-      <img src="temp-icon.png" alt="Thermometer icon" />
+      <img src="temp-icon.png" alt="Thermometer icon"/>
       <div>
         <h2>Current Temperatures</h2>
         <p>{{ currentDate | date:'medium' }}</p>
@@ -15,14 +15,14 @@
 
   <article class="temperatures">
     <header>
-      <img src="temp-icon.png" alt="Thermometer icon" />
+      <img src="temp-icon.png" alt="Thermometer icon"/>
       <div>
         <h2>Historic Temperatures</h2>
         <p>Berlin</p>
       </div>
     </header>
     <ul>
-      @for (temperature of historicTemperatures | sort:'desc'; track temperature) {
+      @for (temperature of historicTemperatures | sort:'':'desc'; track temperature) {
         <li (click)="onReset($index)">{{ temperature | temp:'cel' }}</li>
       }
     </ul>

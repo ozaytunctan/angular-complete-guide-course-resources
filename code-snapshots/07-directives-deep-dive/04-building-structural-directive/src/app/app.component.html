@@ -12,7 +12,7 @@
   <!-- <ng-template appAuth="admin">
     <p>Only admins should see this!</p>
   </ng-template> -->
-  <p *hasAnyAuthority="['admin']" class="protected-content admin">
+  <p *hasAnyAuthority="['admin','user']" class="protected-content admin">
     Only admins should see this!
   </p>
   <p *hasAuthority="'user'" class="protected-content unauthenticated">
