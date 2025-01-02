@@ -29,6 +29,9 @@ export class AppComponent {
 
   onReset(index: number) {
     this.historicTemperatures[index] = 18;
+    //prune :true ise default ; yeniden sıcaklık değerlerini hesaplaması yapma obje referansları değişmediği için array referans.
+    // prune:false ise obje de herhangi bir değişiklik varsa yeniden hesaplama yapar.
+
     // const newTemps = [...this.historicTemperatures]
     // newTemps[index] = 18;
     // this.historicTemperatures = newTemps;
