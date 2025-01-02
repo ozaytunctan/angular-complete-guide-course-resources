@@ -6,6 +6,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 @Pipe({
     name: 'sort',
     standalone: true,
+    pure: false // Objeler referansları aynı herhangi bir değişiklik yapmaz. false ise objede herhangi bir değişiklik olursa yeniden render eder.
 })
 export class SortPipe implements PipeTransform {
 
