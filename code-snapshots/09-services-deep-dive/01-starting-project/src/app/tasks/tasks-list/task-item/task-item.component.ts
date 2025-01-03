@@ -1,7 +1,7 @@
 import {Component, computed, inject, input} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
-import {Task, TaskStatusLabel, TaskStatus} from '../../task.model';
+import {Task, TaskStatus, TaskStatusLabel} from '../../task.model';
 import {TaskService} from "../../task.service";
 
 @Component({
@@ -27,6 +27,7 @@ export class TaskItemComponent {
     }
   });
 */
+
   taskStatus = computed(() => TaskStatusLabel[this.task().status]);
   private taskService = inject(TaskService);
   onChangeTaskStatus(taskId: string, status: string) {
