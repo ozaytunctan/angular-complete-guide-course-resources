@@ -1,6 +1,5 @@
 import {bootstrapApplication} from '@angular/platform-browser';
 import {APP_INITIALIZER, FactoryProvider, InjectionToken, isDevMode} from '@angular/core';
-
 import {AppComponent} from './app/app.component';
 import {TasksService} from './app/tasks/tasks.service';
 import {Logger} from "./app/log/logger";
