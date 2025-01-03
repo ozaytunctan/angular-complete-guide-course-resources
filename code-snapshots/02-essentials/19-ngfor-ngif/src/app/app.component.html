@@ -2,7 +2,7 @@
 
 <main>
   <ul id="users">
-    <!-- @for (user of users; track user.id) { -->
+     @for (user of users; track user.id) {
       <li *ngFor="let user of users">
         <app-user [user]="user" (select)="onSelectUser($event)" />
       </li>

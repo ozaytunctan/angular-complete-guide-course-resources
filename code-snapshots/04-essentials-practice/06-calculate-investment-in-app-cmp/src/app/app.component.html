@@ -1,2 +1,17 @@
-<app-header />
-<app-user-input />
+<app-header/>
+<app-user-input (calculate)="calculate($event)"/>
+
+<ul class="investment-results">
+  <li>
+    <span>Year</span>
+    <span>AnnualInvestment</span>
+    <span>Interest</span>
+  </li>
+  @for (inv of investmentResults; track inv.year) {
+    <li>
+      <span>{{ inv.year }}</span>
+      <span>{{ inv.annualInvestment }}</span>
+      <span>{{ inv.interest }}</span>
+    </li>
+  }
+</ul>
