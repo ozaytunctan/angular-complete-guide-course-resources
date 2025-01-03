@@ -1,7 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 
-import { TASK_STATUS_OPTIONS, taskStatusOptionsProvider } from '../task.model';
-import { TasksServiceToken } from '../../app.module';
+import {TASK_STATUS_OPTIONS, taskStatusOptionsProvider} from '../task.model';
+import {TasksServiceToken} from '../../app.module';
 
 @Component({
   selector: 'app-tasks-list',
@@ -14,7 +14,20 @@ export class TasksListComponent {
   private selectedFilter = signal<string>('all');
   taskStatusOptions = inject(TASK_STATUS_OPTIONS);
   tasks = computed(() => {
-    switch (this.selectedFilter()) {
+    const taskOptionIndex = this.taskStatusOptions
+      .findIndex(statusOption => this.selectedFilter() === statusOption.value);
+
+    if (taskOptionIndex >= 0) {
+      const taskStatusOption = this.taskStatusOptions[taskOptionIndex];
+      return this.tasksService
+        .allTasks()
+        .filter((task) => task.status === taskStatusOption.taskStatus);
+    }
+
+    return this.tasksService.allTasks();
+
+
+    /*switch (this.selectedFilter()) {
       case 'open':
         return this.tasksService
           .allTasks()
@@ -29,7 +42,7 @@ export class TasksListComponent {
           .filter((task) => task.status === 'DONE');
       default:
         return this.tasksService.allTasks();
-    }
+    }*/
   });
 
   onChangeTasksFilter(filter: string) {
