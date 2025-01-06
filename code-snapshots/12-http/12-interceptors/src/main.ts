@@ -1,25 +1,35 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import {bootstrapApplication} from '@angular/platform-browser';
 import {
+  HttpContext, HttpContextToken,
   HttpEventType,
-  HttpHandlerFn,
+  HttpHandlerFn, HttpHeaders, HttpInterceptorFn,
   HttpRequest,
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
 
-import { AppComponent } from './app/app.component';
-import { tap } from 'rxjs';
+import {AppComponent} from './app/app.component';
+import {tap} from 'rxjs';
 
-function loggingInterceptor(
-  request: HttpRequest<unknown>,
-  next: HttpHandlerFn
-) {
-  // const req = request.clone({
-  //   headers: request.headers.set('X-DEBUG', 'TESTING')
-  // });
+const loggingHttpInterceptFn: HttpInterceptorFn = (request, next: HttpHandlerFn) => {
+  const IS_CACHE_ENABLED = new HttpContextToken<boolean>(() => false);
+  let isCacheEnabled = new HttpContext().get(IS_CACHE_ENABLED);
+
+
+  let httpHeaders = new HttpHeaders();
+  httpHeaders.set('Accept', 'application/json');
+  httpHeaders.set('Content-Type', 'application/json');
+  httpHeaders.set('Cache-Control', 'no-cache');
+
+  const modifiedRequest = request.clone({
+    // headers: request.headers.set('X-DEBUG', 'TESTING')
+    headers: httpHeaders,
+    // withCredentials: true
+  });
+
   console.log('[Outgoing Request]');
-  console.log(request);
-  return next(request).pipe(
+  console.log(modifiedRequest);
+  return next(modifiedRequest).pipe(
     tap({
       next: event => {
         if (event.type === HttpEventType.Response) {
@@ -32,6 +42,9 @@ function loggingInterceptor(
   );
 }
 
+
 bootstrapApplication(AppComponent, {
-  providers: [provideHttpClient(withInterceptors([loggingInterceptor]))],
+  providers: [
+    provideHttpClient(withInterceptors([loggingHttpInterceptFn]))
+  ],
 }).catch((err) => console.error(err));
