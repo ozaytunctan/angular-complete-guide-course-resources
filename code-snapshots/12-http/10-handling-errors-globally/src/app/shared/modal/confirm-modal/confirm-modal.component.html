@@ -1,0 +1,15 @@
+<app-modal>
+  <div class="confirm-modal">
+    <h2>{{ title() }}</h2>
+    <p>{{ message() }}</p>
+
+    <div class="confirmation-actions">
+      <button class="button"
+              (click)="onCancel()">Cancel
+      </button>
+      <button class="button"
+              (click)="onConfirm()">Ok
+      </button>
+    </div>
+  </div>
+</app-modal>
