@@ -1,9 +1,9 @@
 @if (error()) {
-  <app-error-modal title="An error occurred!" [message]="error()" />
+  <app-error-modal title="An error occurred!" [message]="error()"/>
 }
 
 <header>
-  <img src="logo.png" alt="Stylized globe" />
+  <img src="logo.png" alt="Stylized globe"/>
   <h1>PlacePicker</h1>
   <p>
     Create your personal collection of places you would like to visit or you
@@ -12,7 +12,17 @@
 </header>
 
 <main>
-  <app-available-places />
 
-  <app-user-places />
+<!--  <app-card>-->
+<!--    <card-header>-->
+<!--      <h2>Custom Card Header</h2>-->
+<!--    </card-header>-->
+
+<!--    <card-body>-->
+<!--      <div>-->
+<!--        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, sit.</p>-->
+<!--      </div>-->
+<!--    </card-body>-->
+<!--  </app-card>-->
+  <router-outlet></router-outlet>
 </main>
