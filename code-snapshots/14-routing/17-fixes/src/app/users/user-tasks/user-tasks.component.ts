@@ -36,10 +36,9 @@ export const resolveUserName: ResolveFn<string> = (
   routerState: RouterStateSnapshot
 ) => {
   const usersService = inject(UsersService);
-  const userName =
-    usersService.users.find(
-      (u) => u.id === activatedRoute.paramMap.get('userId')
-    )?.name || '';
+  const userId = activatedRoute.paramMap.get('userId');
+  const userName = usersService.users
+    .find((u) => u.id === userId)?.name || '';
   return userName;
 };
 

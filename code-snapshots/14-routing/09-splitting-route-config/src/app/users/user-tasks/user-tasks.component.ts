@@ -18,26 +18,25 @@ import { UsersService } from '../users.service';
   styleUrl: './user-tasks.component.css',
 })
 export class UserTasksComponent implements OnInit {
-  // userId = input.required<string>();
-  userName = '';
-  private usersService = inject(UsersService);
+  userId = input.required<string>();
+  // userName = '';
   private activatedRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
-
-  // userName = computed(
-  //   () => this.usersService.users.find((u) => u.id === this.userId())?.name
-  // );
+  private usersService = inject(UsersService);
+  userName = computed(
+    () => this.usersService.users.find((u) => u.id === this.userId())?.name
+  );
 
   ngOnInit(): void {
-    console.log(this.activatedRoute);
-    const subscription = this.activatedRoute.paramMap.subscribe({
-      next: (paramMap) => {
-        this.userName =
-          this.usersService.users.find((u) => u.id === paramMap.get('userId'))
-            ?.name || '';
-      },
-    });
-
-    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+  //   console.log(this.activatedRoute);
+  //   const subscription = this.activatedRoute.paramMap.subscribe({
+  //     next: (paramMap) => {
+  //       this.userName =
+  //         this.usersService.users.find((u) => u.id === paramMap.get('userId'))
+  //           ?.name || '';
+  //     },
+  //   });
+  //
+  //   this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 }

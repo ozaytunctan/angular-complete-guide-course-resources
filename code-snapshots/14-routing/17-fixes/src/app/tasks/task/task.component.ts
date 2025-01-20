@@ -1,10 +1,10 @@
-import { Component, inject, input } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, inject, input} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { type Task } from './task.model';
-import { CardComponent } from '../../shared/card/card.component';
-import { TasksService } from '../tasks.service';
+import {type Task} from './task.model';
+import {CardComponent} from '../../shared/card/card.component';
+import {TasksService} from '../tasks.service';
 
 @Component({
   selector: 'app-task',
@@ -22,9 +22,10 @@ export class TaskComponent {
   onComplete() {
     this.tasksService.removeTask(this.task().id);
     this.router.navigate(['./'], {
-      relativeTo: this.activatedRoute,
-      onSameUrlNavigation: 'reload',
-      queryParamsHandling: 'preserve',
-    });
+        relativeTo: this.activatedRoute,// Mevcut routing üzerinden bir geri gitmesi
+        onSameUrlNavigation: 'reload',//aynı route yönlendirmesi olduğunda componenti yeniden yükle
+        queryParamsHandling: 'preserve',// aynı route yönlendirmesi olduğunda query parametrelerini tut
+      }
+    );
   }
 }

@@ -3,11 +3,13 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { ResolveFn, RouterLink } from '@angular/router';
+import {ResolveFn, RouterLink} from '@angular/router';
 
-import { TaskComponent } from './task/task.component';
-import { TasksService } from './tasks.service';
-import { Task } from './task/task.model';
+import {TaskComponent} from './task/task.component';
+import {TasksService} from './tasks.service';
+import {Task} from './task/task.model';
+import {Order} from "@course/common";
+
 
 @Component({
   selector: 'app-tasks',
@@ -19,7 +21,7 @@ import { Task } from './task/task.model';
 export class TasksComponent {
   userTasks = input.required<Task[]>();
   userId = input.required<string>();
-  order = input<'asc' | 'desc' | undefined>();
+  order = input<Order>();
 }
 
 export const resolveUserTasks: ResolveFn<Task[]> = (
